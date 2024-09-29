@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: timeout.poc
+#  mvc:
+#    async:
+#      request-timeout: 500 # nem használ https://www.baeldung.com/spring-rest-timeout
+
+management:
+  server:
+    port: 9090
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
+    threads:
+      max: 50
+      max-queue-capacity: 100 # csak 3.3.0-tól
+    #accept-count: 100 # nem használ
+    #max-connections: 100 Read timeout lett a vége :-(
