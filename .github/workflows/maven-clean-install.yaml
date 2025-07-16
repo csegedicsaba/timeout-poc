@@ -22,3 +22,11 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
+
+      - name: Build Docker image
+        run: docker build -t timeout-poc:latest .
+
+      - name: Run Scout
+        uses: githubnext/scout-action@v2
+        with:
+          report: true
