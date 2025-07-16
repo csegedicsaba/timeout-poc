@@ -26,6 +26,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t timeout-poc:latest .
 
-      - name: Run Scout (via Docker)
-        run: |
-          docker run --rm -v ${{ github.workspace }}:/repo githubnext/scout:latest analyze /repo
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
