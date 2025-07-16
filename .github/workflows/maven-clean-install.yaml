@@ -26,7 +26,6 @@ jobs:
       - name: Build Docker image
         run: docker build -t timeout-poc:latest .
 
-      - name: Run Scout
-        uses: githubnext/scout-action@v2
-        with:
-          report: true
+      - name: Run Scout (via Docker)
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/repo githubnext/scout:latest analyze /repo
